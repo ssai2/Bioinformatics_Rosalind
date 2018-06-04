@@ -1,0 +1,35 @@
+file=open("/Users/Sara/Desktop/rosalind_ba5c.txt",'r')
+
+string=file.read().split()
+str1=string[0]
+str2=string[1]
+m=len(str1)
+n=len(str2)
+matrix= [[0 for x in range(n+1)] for x in range (m+1)]
+
+for x in range(m):
+    for i in range (n):
+        if str1[x]==str2[i]:
+            matrix[x+1][i+1]=matrix[x][i]+1
+
+        else:
+            matrix[x+1][i+1]=max(matrix[x+1][i], matrix[x][i+1])
+result=""
+x=m
+i=n
+while x>0 and i > 0 :
+    if matrix[x][i]==matrix[x-1][i]:        
+        x-=1
+     
+    elif matrix[x][i] == matrix[x][i-1]:
+        i-=1
+    else:
+        result+=str1[x-1]
+        i-=1
+        x-=1
+        
+output=""
+for x in reversed(result):
+    output+=x
+#print(result[0]+result[::-1])
+print(output)

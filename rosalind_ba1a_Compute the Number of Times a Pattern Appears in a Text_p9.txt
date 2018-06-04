@@ -1,0 +1,15 @@
+file=open("/Users/Sara/Desktop/rosalind_ba1a.txt",'r')
+string=[]
+for x in file.readlines():
+     string.append(x)
+
+text=string[0]
+pattern=string[1]
+count=0
+for x in range(0,len(text)-len(pattern)):
+    kmer=text[x:x+len(pattern)]
+    if(kmer==pattern):
+        count=count+1
+    
+print(count)
+print(pattern)

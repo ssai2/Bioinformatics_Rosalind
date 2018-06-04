@@ -1,0 +1,8 @@
+file=open("/Users/Sara/Sara's door/rosalind_rna.txt",'r')
+rna=""
+for x in file.read():
+    if(x=='T'):
+        rna+='U'
+        continue
+    rna+=x
+print(rna)

@@ -1,0 +1,16 @@
+file=open("/Users/Sara/Desktop/rosalind_ba1m.txt",'r')
+string=[]
+for x in file.read().split():
+    string.append(x)
+indx=int(string[0])
+k=int(string[1])
+symbols={0:'A',1:'C', 2:'G', 3:'T'}
+
+def NumberToPattern(indx,k):
+    if(k<=1):
+        return symbols[indx]
+    new_indx=int(indx/4)
+    converted=NumberToPattern(new_indx,k-1)+symbols[indx%4]
+    return converted
+
+print(NumberToPattern(indx,k))

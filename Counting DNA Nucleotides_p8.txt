@@ -1,0 +1,16 @@
+file=open("/Users/Sara/Sara's door/rosalind_dna.txt",'r')
+rna=""
+t=0
+a=0
+g=0
+c=0
+for x in file.read():
+    if(x=='T'):
+        t+=1
+    if(x=='G'):
+        g+=1
+    if(x=='C'):
+        c+=1
+    if(x=='A'):
+        a+=1
+print (str(a)+' '+str(c)+' '+str(g)+' '+str(t))

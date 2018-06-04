@@ -1,0 +1,20 @@
+file=open("/Users/Sara/Desktop/rosalind_ba1f.txt",'r')
+genome=file.read()
+counter=[]
+c=0
+for x in genome:
+    if(x=='C'):
+        c-=1
+        counter.append(c)
+        continue
+    if(x=='G'):
+        c+=1
+        counter.append(c)
+        continue
+    counter.append(c)
+mn=min(counter)
+c=1
+for x in counter:
+    if(x==mn):
+        print(c)
+    c+=1

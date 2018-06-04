@@ -1,0 +1,30 @@
+file=open("/Users/Sara/Desktop/rosalind_ba1h.txt",'r')
+string=[]
+for x in file.read().split():
+    string.append(x)
+pattern=string[0]
+text=string[1]
+d=int(string[2])
+
+p2=""
+mismatched=[]
+
+def mismatch(p1,p2,d):
+    count=0
+    num=0
+    for x in range(len(p1)):
+        if(p1[x]!=p2[x]):
+            count+=1
+            #print(count)
+    if(count<=d):
+        num= 1
+    return num
+
+for x in range(len(text)):
+    p2=text[x:x+len(pattern)]
+    if(len(p2)<len(pattern)):
+        break
+    num=mismatch(pattern,p2,d)
+    if(num==1):
+        mismatched.append(int(x))
+        print(int(x))

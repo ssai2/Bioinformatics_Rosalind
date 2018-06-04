@@ -1,0 +1,11 @@
+file=open("/Users/Sara/Desktop/rosalind_ba1d.txt",'r')
+string=[]
+for x in file.readlines():
+     string.append(x)
+pattern=string[0]
+text=string[1]
+kmer=""
+for x in range(0,len(text)-len(pattern)):
+    kmer=text[x:x+len(pattern)-1]
+    if kmer in pattern:
+        print(x)

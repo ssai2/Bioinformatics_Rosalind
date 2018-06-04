@@ -1,0 +1,38 @@
+file=open("/Users/Sara/Desktop/rosalind_ba2a.txt",'r')
+string=file.read().split()
+k=int(string[0])
+d=int(string[1])
+motifs=[]
+for x in range(2,len(string)):
+    motifs.append(string[x])
+
+def motifEnumeration(kmer,d):
+    if d==0:
+        return [kmer]
+    else:
+        temp=[]
+        for km in motifEnumeration(kmer,d-1):
+            for i in range(k):
+                for x in ['A','C','G','T']:
+                    mis=km[:i]+x+km[i+1:]
+                    temp.append(mis)
+        return set(temp)
+
+def generateKmers(dna,k,d):
+    kmers=[]    
+    for i in range(len(dna)-k+1):
+        km=dna[i:i+k]
+        kmers.extend(motifEnumeration(km,d))
+    return kmers
+
+
+kmersList= []
+
+kmersList=generateKmers(motifs[0],k,d)
+
+for x in motifs[1:]:
+    kmersList=set(kmersList) & set(generateKmers(x, k, d))
+
+
+p=' '.join(kmersList)
+print(p)

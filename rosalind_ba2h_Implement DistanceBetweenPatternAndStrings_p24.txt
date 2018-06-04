@@ -1,0 +1,32 @@
+import math
+
+file=open("/Users/Sara/Desktop/rosalind_ba2h.txt",'r')
+dna=[]
+pattern=""
+i=0
+for x in file.read().split():
+    if(i==0):
+        pattern=x
+        i=1
+    dna.append(x)
+def hammingDistance(p1,p2):
+    counter=0
+
+    for x in range(len(p1)):
+        if(p1[x]!=p2[x]):
+            counter+=1
+    return counter
+
+def distanceBetweenPatternAndStrings(pattern, string):
+    k=len(pattern)
+    distance=0
+    for x in string:
+        hamming_Distance=float(math.inf)
+        for m in range(len(x)):
+            pattern2=x[m:m+k]
+            if(len(pattern2) == len(pattern) ):
+                if (hamming_Distance> hammingDistance(pattern,pattern2)):
+                    hamming_Distance=hammingDistance(pattern,pattern2)
+        distance=distance+hamming_Distance
+    return distance
+print(distanceBetweenPatternAndStrings(pattern,dna))

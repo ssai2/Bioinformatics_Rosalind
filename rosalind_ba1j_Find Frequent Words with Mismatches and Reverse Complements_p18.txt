@@ -1,0 +1,69 @@
+import itertools
+file=open("/Users/Sara/Desktop/rosalind_ba1j.txt",'r')
+f = open('/Users/Sara/Desktop/output_17.txt','w')
+
+string=[]
+for x in file.read().split():
+    string.append(x)
+dna=string[0]
+k=int(string[1])
+d=int(string[2])
+
+def hammingDistance(p1,p2):
+    counter=0
+    for x in range(len(p1)):
+        if(p1[x]!=p2[x]):
+            counter+=1
+    return counter
+
+def reversed_string(dna):
+    p=""
+    for x in reversed(dna):
+        if(x=='T'):
+            p+='A'
+        if(x=='A'):
+            p+='T'
+        if(x=='G'):
+            p+='C'
+        if(x=='C'):
+            p+='G'
+    return p
+def mismatchedKmers ():
+    kmers=[]
+    for x in itertools.product("ACGT", repeat=k):
+            kmers.append(("".join(x)))
+    return kmers
+
+
+patterns=[]
+for x in range(len(dna)):
+    patterns.append(dna[x:x+k])
+    
+kmers=mismatchedKmers()
+freq_kmers={}
+
+for m in kmers:
+    for x in patterns:
+        if(len(m) and len(x) ==k):
+            if(hammingDistance(m,x)<=d):
+                if m not in freq_kmers.keys():
+                    freq_kmers.update({m:1})
+                else:
+                    c=1+int(freq_kmers[m])
+                    freq_kmers.update({m:c})
+            reverse=reversed_string(x)
+            if(hammingDistance(m,reverse)<=d):
+                if m not in freq_kmers.keys():
+                    freq_kmers.update({m:1})
+                else:
+                    c=1+int(freq_kmers[m])
+                    freq_kmers.update({m:c})
+
+mx=max(freq_kmers.values())
+output=""
+
+for x in freq_kmers:
+   if(freq_kmers[x]==mx):
+        output+=" "+str(x)
+f.write(output)
+f.close()

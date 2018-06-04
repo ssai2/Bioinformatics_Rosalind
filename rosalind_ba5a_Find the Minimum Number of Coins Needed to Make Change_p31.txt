@@ -1,0 +1,29 @@
+file=open("/Users/Sara/Desktop/rosalind_ba5a.txt",'r')
+money=int(file.readline())
+coins=[]
+
+for x in file.read().split(','):
+    if x == 0:
+        continue
+    coins.append(int(x))
+print(coins)
+def greedyChange(money):
+    change=[]
+    coinM=[]
+    for x in range(len(coins)):
+        if coins[x]<money:
+            coinM.append(coins[x])
+    while(money>0):
+        coin=max(coinM)
+ #       print("before deletion:",coin)
+        if (money-coin)<0:
+            del coinM[coinM.index(coin)]
+#            print("deleted",coin)
+            continue
+#        print("after delettion",coin)
+        change.append(coin)
+        money=money-coin
+    return change
+
+output=greedyChange(money)
+print(len(output))

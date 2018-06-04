@@ -1,0 +1,31 @@
+file=open("/Users/Sara/Desktop/rosalind_ba1e.txt",'r')
+string=[]
+for x in file.read().split():
+    string.append(x)
+gen=string[0]
+k=int(string[1])
+L=int(string[2])
+t=int(string[3])
+kmers=[]
+counter=[]
+
+def count(text,pattern):
+    count=0
+    kmer=""
+    for x in range(0,len(text)-len(pattern)):
+        kmer=text[x:x+len(pattern)]
+        if(kmer==pattern):
+            count+=1
+    return count
+indx=0
+for x in range (len(gen)):
+    
+    pattern=gen[x:x+k]
+    if(len(pattern)<k):
+        break
+    if(pattern not in kmers):
+        counter.append(count(gen[x:x+L],pattern))
+        if(counter[indx]>=t):
+            print(pattern)
+            kmers.append(pattern)
+        indx+=1

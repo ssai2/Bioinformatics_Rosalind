@@ -1,0 +1,51 @@
+import itertools
+file=open("/Users/Sara/Desktop/rosalind_ba1i.txt",'r')
+f = open('/Users/Sara/Desktop/output_17.txt','w')
+
+string=[]
+for x in file.read().split():
+    string.append(x)
+text=string[0]
+k=int(string[1])
+d=int(string[2])
+
+def hammingDistance(p1,p2):
+    counter=0
+    for x in range(len(p1)):
+        if(p1[x]!=p2[x]):
+            counter+=1
+    return counter
+
+def mismatchedKmers ():
+    kmers=[]
+    for x in itertools.product("ACGT", repeat=k):
+            kmers.append(("".join(x)))
+    return kmers
+
+
+patterns=[]
+for x in range(len(text)):
+    patterns.append(text[x:x+k])
+    
+kmers=mismatchedKmers()
+freq_kmers={}
+
+for m in kmers:
+    for x in patterns:
+        if(len(m) and len(x) ==k):
+            if(hammingDistance(m,x)<=d):
+                if m not in freq_kmers.keys():
+                    freq_kmers.update({m:1})
+                else:
+                    c=1+int(freq_kmers[m])
+                    freq_kmers.update({m:c})
+                
+
+mx=max(freq_kmers.values())
+output=""
+
+for x in freq_kmers:
+   if(freq_kmers[x]==mx):
+        output+=" "+str(x)
+f.write(output)
+f.close()

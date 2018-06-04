@@ -1,0 +1,28 @@
+import itertools
+file=open("/Users/Sara/Desktop/rosalind_ba1n.txt",'r')
+string=[]
+for x in file.read().split():
+    string.append(x)
+pattern=string[0]
+d=int(string[1])
+
+def hammingDistance(p1,p2):
+    counter=0
+    for x in range(len(p1)):
+        if(p1[x]!=p2[x]):
+            counter+=1
+    return counter
+
+def mismatchedKmers ():
+    kmers=[]
+    for x in itertools.product("ACGT", repeat=len(pattern)):
+            kmers.append(("".join(x)))
+    return kmers
+
+
+    
+kmers=mismatchedKmers()
+
+for x in kmers:
+    if(hammingDistance(pattern,x)<=d):
+       print(x)

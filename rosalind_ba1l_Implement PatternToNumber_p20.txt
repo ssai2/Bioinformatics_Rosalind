@@ -1,0 +1,13 @@
+file=open("/Users/Sara/Desktop/rosalind_ba1l.txt",'r')
+string=file.readline().rstrip("\n")
+symbols={'A':0, 'C':1, 'G':2, 'T':3}
+
+def patternToNumber(pattern,symbols):
+    if (len(pattern)<=0):
+        return 0
+    if(pattern=='\n'):
+        return 0
+    converted=4*patternToNumber((pattern[:-1]),symbols)+symbols[pattern[-1]]
+    return converted
+
+print(patternToNumber(string,symbols))

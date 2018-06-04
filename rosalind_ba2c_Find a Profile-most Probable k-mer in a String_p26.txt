@@ -1,0 +1,62 @@
+file=open("/Users/Sara/Desktop/rosalind_ba2c.txt",'r')
+
+string=""
+k=0
+prob=[]
+m=0
+for x in file.read().split():
+    if(m==0):
+        string=x
+        m=1
+        continue
+    if (m==1):
+        k=int(x)
+        m=2
+        continue
+
+    else:prob.append(x)
+profile=[[0]*k for i in range(4)]
+
+for x in range(0,len(prob)):
+    #print(prob[x],x)
+    if(x<k):
+        profile[0][x]=prob[x]
+        continue
+    if(x<k*2):
+        profile[1][x-k]=prob[x]
+        continue
+    if(x<k*3):
+        profile[2][x-k*2]=prob[x]
+        continue
+    if(x<k*4):
+        profile[3][x-k*3]=prob[x]
+        
+def calProb(pattern):
+    patProb=1
+    i=0
+    for x in pattern:
+        if(i>k):
+            i=0
+        if x=='A':
+            patProb*=float(profile[0][i])
+        if x=='C':
+            patProb*=float(profile[1][i])
+        if x=='G':
+            patProb*=float(profile[2][i])
+        if x=='T':
+            patProb*=float(profile[3][i])
+        i+=1
+    return patProb
+
+prof_p={}
+for x in range(len(string)):
+    pattern=string[x:x+k]
+    if(len(pattern)<k):
+        break
+    prof_p.update({pattern:calProb(pattern)})
+
+maximum=max(prof_p.values())
+for x in prof_p:
+    if(maximum==prof_p[x]):
+        print(x)
+        break;

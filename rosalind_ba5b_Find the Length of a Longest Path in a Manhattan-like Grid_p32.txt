@@ -1,0 +1,46 @@
+file=open("/Users/Sara/Desktop/rosalind_ba5b.txt",'r')
+nums=[]
+m=0
+n=0
+t=0
+for x in file.read().split():
+    if t == 0:
+        n=int(x)
+        t=1
+        continue
+    if t==1:
+        m=int(x)
+        t=2
+        continue
+    if x=='-':
+        continue
+    nums.append(x)
+matrixD = [[0 for x in range(m+1)] for y in range(n)]
+matrixR = [[0 for x in range(m)] for y in range(n+1)]
+indx=0
+for x in range (n):
+    for i in range (m+1):
+        matrixD[x][i]=int(nums[indx])
+        indx+=1
+        
+for x in range(n+1):
+    for i in range( m):
+        matrixR[x][i]=int(nums[indx])
+        indx+=1
+
+
+def manhatinDistance(n,m,matrixD,matrixR):
+    matrix=[[0 for x in range(m+1)] for y in range(n+1)]
+
+    for x in range(1,n+1):
+        matrix[x][0]= matrix[x-1][0]+matrixD[x-1][0]
+
+    for i in range (1,m+1):
+        matrix[0][i]= matrix[0][i-1]+matrixR[0][i-1]
+    for i in range (1,n+1):
+        for j in range (1,m+1):
+            matrix[i][j]=max(matrix[i-1][j]+matrixD[i-1][j],matrix[i][j-1]+matrixR[i][j-1])
+
+    return matrix[n][m]
+
+print(manhatinDistance(n,m,matrixD,matrixR))

@@ -1,0 +1,12 @@
+file=open("/Users/Sara/Desktop/rosalind_ba1g.txt",'r')
+text=[]
+for x in file.read().split():
+    text.append(x)
+t1=text[0]
+t2=text[1]
+count=0
+
+for x in range(len(t1)):
+    if(t1[x]!=t2[x]):
+        count+=1
+print(count)

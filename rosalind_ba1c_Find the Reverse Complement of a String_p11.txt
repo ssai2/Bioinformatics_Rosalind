@@ -1,0 +1,14 @@
+file=open("/Users/Sara/Desktop/rosalind_ba1c.txt",'r')
+dna=file.read()
+p=""
+for x in reversed(dna):
+    if(x=='T'):
+        p+='A'
+    if(x=='A'):
+        p+='T'
+    if(x=='G'):
+        p+='C'
+    if(x=='C'):
+        p+='G'
+
+print(p)

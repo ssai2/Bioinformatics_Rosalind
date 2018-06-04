@@ -1,0 +1,23 @@
+import itertools
+import operator
+
+file=open("/Users/Sara/Desktop/rosalind_ba1k.txt",'r')
+string=[]
+for x in file.read().split():
+    string.append(x)
+text=string[0]
+k=int(string[1])
+f = open('/Users/Sara/Desktop/output_19.txt','w')
+kmers={}
+for x in itertools.product("ACGT", repeat=k):
+    kmers.update({"".join(x):0})
+
+for x in range(len(kmers)):
+    p=text[x:x+k]
+    if(len(p)==k):
+            kmers[p]+=1
+freq=""            
+for key,value in sorted(kmers.items()):
+    freq+=" "+str(kmers[key])
+f.write(freq)
+f.close()

@@ -1,0 +1,23 @@
+file=open("/Users/Sara/Desktop/rosalind_ba5g.txt",'r')
+
+s=file.read().split()
+str1=s[0]
+str2=s[1]
+
+
+      
+i= len (str1)
+j= len(str2)
+matrix = [[0 for x in range(j+1)] for x in range ( i+1)]
+
+for n in range(i+1):
+    for y in range(j+1):
+        if n==0:
+            matrix[n][y]=y
+        elif y == 0 :
+            matrix[n][y]=n
+        elif str1[n-1] == str2 [ y-1]:
+            matrix [n][y] = matrix [n-1][y-1]
+        else:
+            matrix[n][y]=1+ min( matrix[n-1][y-1],matrix[n-1][y],matrix[n][y-1])
+print(matrix[i][j])

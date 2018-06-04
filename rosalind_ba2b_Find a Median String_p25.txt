@@ -1,0 +1,52 @@
+import math
+import itertools
+file=open("/Users/Sara/Desktop/rosalind_ba2b.txt",'r')
+dna=[]
+dist={}
+k=0
+i=0
+for x in file.read().split():
+    if(i==0):
+        k=int(x)
+        i=1
+    else:dna.append(x)
+
+def hammingDistance(p1,p2):
+    counter=0
+
+    for x in range(len(p1)):
+        if(p1[x]!=p2[x]):
+            counter+=1
+    return counter
+def generateKmers ():
+    kmers=[]
+    for x in itertools.product("ACGT", repeat=k):
+            kmers.append(("".join(x)))
+    return kmers
+
+def distanceBetweenPatternAndStrings(pattern, string):
+    distance=0
+    for x in string:
+        hamming_Distance=float(math.inf)
+        for m in range(len(x)):
+            pattern2=x[m:m+k]
+            if(len(pattern2) == len(pattern) ):
+                if (hamming_Distance> hammingDistance(pattern,pattern2)):
+                    hamming_Distance=hammingDistance(pattern,pattern2)
+        distance=distance+hamming_Distance
+        dist.update({pattern:distance})
+
+    return dist
+
+indx=0
+kmers=generateKmers()
+for x in kmers:
+         distanceBetweenPatternAndStrings(x,dna)
+         indx+=1
+    
+    
+minimum=min(dist.values())
+for x in dist:
+    if(minimum==dist[x]):
+        print(x)
+        break;

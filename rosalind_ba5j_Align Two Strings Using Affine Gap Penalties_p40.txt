@@ -1,0 +1,16 @@
+from Bio import pairwise2
+from Bio.SubsMat import MatrixInfo as matlist
+
+#file=open("/Users/Sara/Desktop/35.txt",'r')
+
+blosum = matlist.blosum62
+
+
+str1="EMNTDMTMTQSNALVQTCCIANNDYANSWLVWFIFSITPCECTVADGIDVWTNLCEIHRPGGGRVSARKLWDHWTLNSIMGSFTSV"
+str2="AACMQSTQALVQTCQKSMNSFWEYANNDYANSWMVWCCWAWYIFSLTPCECCVAAGWTNTCEIHRPGGGRVSTRKLNDHWTLNSIMMSFTSV"
+
+
+allignment=pairwise2.align.globalds(str1, str2, blosum,-11,-1)
+print(int(allignment[0][2]))
+print(allignment[0][0])
+print(allignment[0][1])
